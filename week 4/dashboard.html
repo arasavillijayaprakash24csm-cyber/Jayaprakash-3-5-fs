@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Campus Placement Portal</title>
+    <link rel="stylesheet" href="Style.css">
+</head>
+<body>
+    <header>
+        <div class="logo-section">
+            <img src="C:\Users\soulr\OneDrive\Pictures\anits.jpeg" alt="College Logo" width="60" height="60">
+            <div class="title">
+                <h1>ANIL NEERUKONDA INSTITUTE OF TECHNOLOGY AND SCIENCES</h1>
+                <h2>Campus Placement Portal</h2>
+            </div>
+        </div>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="About.html">About</a></li>
+            <li><a href="register.html">Register</a></li>
+            <li><a href="login.html">Login</a></li>
+            <li><a href="companies.html">Companies</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </nav>
+    <br>
+<style>
+body{
+    font-family:Arial,sans-serif;
+    background:#f2f2f2;
+    text-align:center;
+    margin:0;
+}
+.container{
+    margin-top:100px;
+}
+.card{
+    width:500px;
+    margin:auto;
+    background:white;
+    padding:30px;
+    border-radius:10px;
+    box-shadow:0 0 10px gray;
+}
+button{
+    padding:12px 25px;
+    background:blue;
+    color:white;
+    border:none;
+    border-radius:5px;
+    cursor:pointer;
+    font-size:16px;
+}
+button:hover{
+    background:darkblue;
+}
+#loginDateTime{
+    color:green;
+    font-size:18px;
+    margin:20px 0;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+<div class="card">
+<h1>Welcome to Campus Placement Dashboard</h1>
+
+<h3>Login Successful</h3>
+
+<p id="loginDateTime"></p>
+
+<p>If you are inactive for more than 10 seconds, you will be redirected to the Login Page.</p>
+
+<button onclick="resetTimer()">I'm Active</button>
+
+</div>
+</div>
+
+<script>
+
+function showLoginTime(){
+
+    let loginTime = localStorage.getItem("loginTime");
+    let now = new Date();
+    let hour = now.getHours();
+    let greeting = "";
+
+    if(hour >= 5 && hour < 12){
+        greeting = "Good Morning";
+    }
+    else if(hour >= 12 && hour < 17){
+        greeting = "Good Afternoon";
+    }
+    else if(hour >= 17 && hour < 21){
+        greeting = "Good Evening";
+    }
+    else{
+        greeting = "Good Night";
+    }
+
+    if(loginTime){
+
+        let date = new Date(loginTime);
+
+        document.getElementById("loginDateTime").innerHTML =
+        "<h2>" + greeting + "!</h2>" +
+        "<b>Login Date :</b> " + date.toLocaleDateString() +
+        "<br><br>" +
+        "<b>Login Time :</b> " + date.toLocaleTimeString();
+
+    }else{
+
+        document.getElementById("loginDateTime").innerHTML =
+        "<h2>" + greeting + "!</h2>" +
+        "<b>Current Date :</b> " + now.toLocaleDateString() +
+        "<br><br>" +
+        "<b>Current Time :</b> " + now.toLocaleTimeString();
+
+    }
+}
+
+let timer;
+
+function logoutUser(){
+    alert("Session Expired");
+    localStorage.removeItem("loginTime");
+    window.location.href = "login.html";
+}
+
+function setTimer(callback){
+    clearTimeout(timer);
+    timer = setTimeout(callback, 10000);
+}
+
+function resetTimer(){
+    setTimer(logoutUser);
+}
+
+window.onload = function(){
+    showLoginTime();
+    resetTimer();
+}
+
+document.onmousemove = resetTimer;
+document.onkeypress = resetTimer;
+document.onclick = resetTimer;
+document.onscroll = resetTimer;
+
+</script>
+<footer>
+    <h3>© 2026 ANITS | Department of Training & Placement</h3>
+    <p>Sangivalasa, Visakhapatnam, Andhra Pradesh</p>
+</footer>
+<script src="script.js"></script>
+</body>
+</html>
